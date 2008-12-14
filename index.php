@@ -11,14 +11,31 @@ $track = 'Never Gonna Give You Up';
 
 $start = time();
 
-for ( $i=0; $i < $numTracksRequired; $i++ ) {
+$url = LAST_FM_API_URL.'?method=track.getinfo&artist='.urlencode($artist).'&track='.urlencode($track).'&api_key='.LAST_FM_API_KEY;
+
+$curl = new CurlCall();
+$data = $curl->getFromXmlSource($url);
+$item = $data->track;
+
+$isStreamable = $item->streamable;
+$isFullTrack = 0;
+foreach($item->streamable->attributes() as $key => $value) {
+    if ( 'fulltrack' == $key ) {
+        $isFullTrack = $value;
+    }
+}
+
+if ($isStreamable && $isFullTrack) {
+    $playlist = array($data->track);    
+}
+
+for ( $i=0; $i < $numTracksRequired - 1; $i++ ) {
     
     $chooseFrom = array();
     
     $url = LAST_FM_API_URL.'?method=track.getsimilar&artist='.urlencode($artist).'&track='.urlencode($track).'&api_key='.LAST_FM_API_KEY;
     //error_log($url);
 
-    $curl = new CurlCall();
     $data = $curl->getFromXmlSource($url);
     //error_log(print_r($data, true));
     
@@ -51,7 +68,7 @@ for ( $i=0; $i < $numTracksRequired; $i++ ) {
     if ( 0 == sizeof($chooseFrom) ) {
         foreach ( $data->similartracks->track as $item ) {
             if (!isSongAlreadyInPlaylist($item, $playlist)) {
-                error_log("pushed from the topish - {$item->artist->name} - {$item->name} - {$item->match}");
+                //error_log("pushed from the topish - {$item->artist->name} - {$item->name} - {$item->match}");
                 array_push($playlist, $item);
                 break;
             }
