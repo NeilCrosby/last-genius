@@ -23,6 +23,11 @@ class CurlCall {
         return $this->get($url, $aOptions);
     }
 
+    public function getFromXmlSource($url, $aOptions=array()) {
+        $aOptions['type'] = 'xml';
+        return $this->get($url, $aOptions);
+    }
+
     private function get($url, $aOptions=array()) {
         $cacheTime = isset($aOptions['cache-time']) ? $aOptions['cache-time'] : 60 * 60 * 24 * 30; // 30 Days default
         $type = isset($aOptions['type']) ? $aOptions['type'] : null;
@@ -33,7 +38,11 @@ class CurlCall {
         if ( $cache->check() ) {
 
             $result = $cache->get();
+            $datatype = $result['datatype'];
             $result = $result['data'];
+            if ( 'xml' == $datatype ) {
+                $result = simplexml_load_string($result);
+            }
 
         } else {
 
@@ -44,14 +53,23 @@ class CurlCall {
             curl_setopt( $session, CURLOPT_RETURNTRANSFER, 1 );    
 
             $result = curl_exec( $session );
+            $cacheResult = $result;
             curl_close( $session );
 
             switch ($type) {
                 case 'php':
                     $result = unserialize($result);
+                    $cacheResult = $result;
+                    $datatype = 'php';
                     break;
                 case 'json':
                     $result = json_decode($result, true);
+                    $cacheResult = $result;
+                    $datatype = 'php'; // ya rly
+                    break;
+                case 'xml':
+                    $result = simplexml_load_string($result);
+                    $datatype = 'xml';
                     break;
                 default:
                     break;
@@ -61,7 +79,8 @@ class CurlCall {
                 array(
                     'url'=>$url,
                     'method'=>'get',
-                    'data'=>$result
+                    'datatype'=>$datatype,
+                    'data'=>$cacheResult
                 )
             );
         }
