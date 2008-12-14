@@ -49,7 +49,13 @@ $taken = time() - $start;
             display: none;
         }
         
+        li {
+            font-size: 50%;
+            display: block;
+        }
+        
         li.current {
+            font-size: 100%;
             display: block;
         }
         
@@ -113,7 +119,7 @@ YAHOO.tct.lastGenius = function () {
             var player = document.getElementById('music-player'+id);
             player.src = url + '?autostart';
             
-            setTimeout( "YAHOO.tct.lastGenius.destroyTrack(" + (trackNum - 1) + ")", 5000);
+            setTimeout( "YAHOO.tct.lastGenius.destroyTrack(" + (trackNum - 1) + ")", 2000);
             
             setTimeout( "YAHOO.tct.lastGenius.loadNewTrack(" + (trackNum + 1) + ")", 20000);
         },
