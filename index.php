@@ -34,15 +34,42 @@ $taken = time() - $start;
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Last Genius</title>
     <style>
-        body {
+        body,
+        a {
+            background: #000;
+            color: #eee;
+            text-decoration: none;
+            font-family: Helvetica, Arial, Sans-serif;
+            font-size: 150%;
+        }
+    
+        li,
+        p,
+        .duration {
+            display: none;
+        }
+        
+        li.current {
+            display: block;
+        }
+        
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            border: none;
         }
     </style>
 </head>
 <body>
 <?php
     echo '<ol id="playlist">';
+    $class = ' class="current"';
     foreach ($playlist as $item) {
-        echo "<li><a href=\"{$item->url}\">{$item->artist->name} - {$item->name} - <span class=\"duration\">{$item->duration}</span></a></li>\n";
+        echo "<li$class><a href=\"{$item->url}\">{$item->artist->name} - {$item->name} <span class=\"duration\">{$item->duration}</span></a></li>\n";
+        $class = '';
     }
     echo '</ol>';
 
@@ -86,9 +113,9 @@ YAHOO.tct.lastGenius = function () {
             var player = document.getElementById('music-player'+id);
             player.src = url + '?autostart';
             
-            setTimeout( "YAHOO.tct.lastGenius.destroyTrack(" + (trackNum - 1) + ")", 2000);
+            setTimeout( "YAHOO.tct.lastGenius.destroyTrack(" + (trackNum - 1) + ")", 5000);
             
-            setTimeout( "YAHOO.tct.lastGenius.loadNewTrack(" + (trackNum + 1) + ")", 30000);
+            setTimeout( "YAHOO.tct.lastGenius.loadNewTrack(" + (trackNum + 1) + ")", 20000);
         },
 
         destroyTrack: function(trackNum) {
@@ -97,6 +124,13 @@ YAHOO.tct.lastGenius = function () {
 
             var player = document.getElementById('music-player'+id);
             player.src = '';
+
+            var listEl = yud.get('playlist');
+            var listEls = listEl.getElementsByTagName('li');
+            
+            listEls[trackNum].className = '';
+            listEls[trackNum + 1].className = 'current';
+            
         }
 
         
