@@ -1,0 +1,6 @@
+<?php
+
+define('LAST_FM_API', 'you need an API key');
+define('LAST_FM_SECRET', 'and why not give us your secret too?');
+
+?>
