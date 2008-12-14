@@ -9,6 +9,16 @@ $numTracksRequired = 10;
 $artist = 'Rick Astley';
 $track = 'Never Gonna Give You Up';
 
+if ( isset($_GET['url']) ) {
+    $origUrl = $_GET['url'];
+    
+    if ( 0 === strpos($origUrl, 'http://www.last.fm/music/')  ) {
+        $pieces = explode('/', $origUrl);
+        $artist = urldecode($pieces[4]);
+        $track  = urldecode($pieces[6]);
+    }
+}
+
 $start = time();
 
 $url = LAST_FM_API_URL.'?method=track.getinfo&artist='.urlencode($artist).'&track='.urlencode($track).'&api_key='.LAST_FM_API_KEY;
