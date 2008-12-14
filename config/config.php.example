@@ -1,6 +1,7 @@
 <?php
 
-define('LAST_FM_API', 'you need an API key');
+define('LAST_FM_API_KEY', 'you need an API key');
 define('LAST_FM_SECRET', 'and why not give us your secret too?');
+define('LAST_FM_API_URL', 'http://ws.audioscrobbler.com/2.0/')
 
 ?>
