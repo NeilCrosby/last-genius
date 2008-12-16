@@ -53,6 +53,14 @@ class LastGenius {
                 if ( $item->match < 0.85 * $bestMatch ) {
                     break;
                 }
+                
+                // make an extra request if we don't know how long the track is
+                if (!$item->duration) {
+                    $url = LAST_FM_API_URL.'?method=track.getinfo&artist='.urlencode($item->artist->name).'&track='.urlencode($item->name).'&api_key='.LAST_FM_API_KEY;
+                    $data = $curl->getFromXmlSource($url);
+
+                    $item->addChild('duration', (string)$data->track->duration);
+                }
 
                 array_push($chooseFrom, $item);
             }
