@@ -107,8 +107,8 @@ YAHOO.tct.lastGenius = function () {
         destroyTrack: function(trackNum) {
             var id = ( trackNum / 2 === parseInt(trackNum / 2, 10) ) ? 1 : 2;
 
-            var player = document.getElementById('music-player'+id);
-            player.src = '';
+            //var player = document.getElementById('music-player'+id);
+            //player.src = '';
 
             var listEl = yud.get('playlist');
             var listEls = listEl.getElementsByTagName('li');
