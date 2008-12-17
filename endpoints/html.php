@@ -74,7 +74,6 @@ YAHOO.tct.lastGenius = function () {
         },
         
         loadNewTrack: function(trackNum) {
-            console.log('time to load a new track');
             var id = ( trackNum / 2 === parseInt(trackNum / 2, 10) ) ? 1 : 2;
             
             var listEl = yud.get('playlist');
@@ -100,7 +99,6 @@ YAHOO.tct.lastGenius = function () {
                     timeToNewTrack = duration;
                 }
             }
-            console.log(timeToNewTrack);
             setTimeout( "YAHOO.tct.lastGenius.loadNewTrack(" + (trackNum + 1) + ")", timeToNewTrack);
         },
 
