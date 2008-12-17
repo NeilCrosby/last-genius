@@ -69,8 +69,18 @@ class LastGenius {
                 foreach ( $data->similartracks->track as $item ) {
                     if (!$this->isSongAlreadyInPlaylist($item, $playlist)) {
                         //error_log("pushed from the topish - {$item->artist->name} - {$item->name} - {$item->match}");
-                        array_push($playlist, $item);
-                        break;
+                        $isStreamable = $item->streamable;
+                        $isFullTrack = 0;
+                        foreach($item->streamable->attributes() as $key => $value) {
+                            if ( 'fulltrack' == $key ) {
+                                $isFullTrack = $value;
+                            }
+                        }
+
+                        if ($isStreamable && $isFullTrack) {
+                            array_push($playlist, $item);
+                            break;
+                        }
                     }
                 }
             } else {
