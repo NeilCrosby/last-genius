@@ -13,7 +13,7 @@ $track = 'Never Gonna Give You Up';
 if ( isset($_GET['url']) ) {
     $origUrl = $_GET['url'];
     
-    if ( 0 === strpos($origUrl, 'http://www.last.fm/music/')  ) {
+    if ( 0 === strpos($origUrl, 'http://www.last.fm/music/') || preg_match('/http:\/\/www\.lastfm\.[a-z]+\/music\//', $origUrl) ) {
         $pieces = explode('/', $origUrl);
         $artist = urldecode($pieces[4]);
         $track  = urldecode($pieces[6]);
