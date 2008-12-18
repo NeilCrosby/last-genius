@@ -4,4 +4,4 @@ Code written for Last.fm's 14th December 2008 Hack Day in London.  It's fairly s
 
 ## Bookmarklet
 
-    javascript:void(window.open('http://projects.thecodetrain.co.uk/last-genius?url='+location.href,'mywin','left=20,top=20,width=700,height=300,toolbar=0,resizable=1'));
+    javascript:void(window.open('http://projects.thecodetrain.co.uk/last-genius/playlist.php?url='+location.href,'mywin','left=20,top=20,width=700,height=300,toolbar=0,resizable=1'));
