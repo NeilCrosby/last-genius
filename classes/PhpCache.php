@@ -31,9 +31,10 @@
       SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       Updated by Neil Crosby for thetenwordreview.com
-      Now allows a prefix to be given to the cached file's name.
-      Also keeps cached data in memory for the script's duration so that
-      re-requesting it on the same page does not incur a reload of the file.
+      * Now allows a prefix to be given to the cached file's name.
+      * Also keeps cached data in memory for the script's duration so that
+        re-requesting it on the same page does not incur a reload of the file.
+      * Now allows CACHE_PATH to be set elsewhere.
    
       Last Updated:  23rd March 2008
    /***************************************************************/
