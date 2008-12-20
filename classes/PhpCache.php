@@ -38,7 +38,9 @@
       Last Updated:  23rd March 2008
    /***************************************************************/
    
-   define('CACHE_PATH', $_SERVER['DOCUMENT_ROOT'].'/cache/');
+   if ( !defined('CACHE_PATH') ) {
+       define('CACHE_PATH', $_SERVER['DOCUMENT_ROOT'].'/cache/');
+   }
    
    class PhpCache {
       var $sFile;
