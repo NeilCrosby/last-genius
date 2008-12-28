@@ -2,8 +2,7 @@
 
 require_once('config/config.php');
 require_once('classes/LastGenius.php');
-require_once('classes/CurlCall.php');
-require_once('classes/PhpCache.php');
+require_once('externals/CurlCall/CurlCall.php');
 
 $playlist = array();
 $numTracksRequired = 10;

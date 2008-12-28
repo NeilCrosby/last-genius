@@ -12,6 +12,18 @@ Drag this: [Last Genius][3]
 
 Then, any time you're on a Last.fm song page that you'd like to create a Genius Playlist for, just click on the bookmarklet and magic will happen.
 
+## Intalling a Last Genius Dev Environment for Yourself
+
+Because Last Genius pulls in some of its dependencies via [giternal][4], you'll need to have that installed.  Other than that, just do something like the following:
+
+    git clone git://github.com/NeilCrosby/curlcall.git 
+    cd curlcall
+    giternal update
+    cd externals/CurlCall/
+    giternal update
+    mkdir /tmp/cache
+
 [1]: http://thecodetrain.co.uk/2008/12/last-genius-a-lastfm-hack-day-project/
 [2]: http://blog.last.fm/2008/12/22/hack-day-2008
 [3]: javascript:void(window.open('http://projects.thecodetrain.co.uk/last-genius/playlist.php?url='+location.href,'mywin','left=20,top=20,width=700,height=300,toolbar=0,resizable=1'));
+[4]: http://github.com/pat-maddox/giternal/tree/master
