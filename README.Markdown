@@ -14,13 +14,15 @@ Then, any time you're on a Last.fm song page that you'd like to create a Genius 
 
 ## Intalling a Last Genius Dev Environment for Yourself
 
-Because Last Genius pulls in some of its dependencies via [giternal][4], you'll need to have that installed.  Other than that, just do something like the following:
+Just do something like the following:
 
-    git clone git://github.com/NeilCrosby/curlcall.git 
-    cd curlcall
-    giternal update
-    cd externals/CurlCall/
-    giternal update
+    git clone git://github.com/NeilCrosby/last-genius.git 
+    cd last-genius
+    git submodule init
+    git submodule update
+    cd externals/curlcall
+    git submodule init
+    git submodule update
     mkdir /tmp/cache
 
 [1]: http://thecodetrain.co.uk/2008/12/last-genius-a-lastfm-hack-day-project/
